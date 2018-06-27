@@ -1,0 +1,17 @@
+# mac os hidden files
+**/.DS_Store
+
+# generated files
+**/target/
+
+# Eclipse project files
+.project
+.settings
+.classpath
+
+# IDEA project files
+.idea/
+**/*.iml
+
+
+
