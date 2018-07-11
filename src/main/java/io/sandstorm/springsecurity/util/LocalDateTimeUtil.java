@@ -27,7 +27,7 @@ public final class LocalDateTimeUtil {
     return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
   }
 
-  public static LocalDateTime convertTolocalDateTimeFrom(final Date date) {
+  public static LocalDateTime convertToLocalDateTimeFrom(final Date date) {
     return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
   }
 }

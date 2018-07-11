@@ -113,8 +113,8 @@ public class ConcreteApprovalStore implements ApprovalStore {
                         ? org.springframework.security.oauth2.provider.approval.Approval
                             .ApprovalStatus.APPROVED
                         : approval.getStatus(),
-                    LocalDateTimeUtil.convertTolocalDateTimeFrom(approval.getExpiresAt()),
-                    LocalDateTimeUtil.convertTolocalDateTimeFrom(approval.getLastUpdatedAt())))
+                    LocalDateTimeUtil.convertToLocalDateTimeFrom(approval.getExpiresAt()),
+                    LocalDateTimeUtil.convertToLocalDateTimeFrom(approval.getLastUpdatedAt())))
         .collect(Collectors.toList());
   }
 
