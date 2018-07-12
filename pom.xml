@@ -12,10 +12,14 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>io.sandstorm</groupId>
+  <groupId>io.github.weresandstorm</groupId>
   <artifactId>spring-security-mongo</artifactId>
   <version>0.8</version>
   <packaging>jar</packaging>
+
+  <name>spring-security-mongo</name>
+  <description>A spring-security-oauth2 extension supporting storing oauth data into MongoDB</description>
+  <url>https://github.com/weresandstorm/spring-security-mongo</url>
 
   <licenses>
     <license>
@@ -33,8 +37,7 @@
 
   <scm>
     <connection>scm:git:git://github.com/simpligility/ossrh-demo.git</connection>
-    <developerConnection>scm:git:ssh://github.com:weresandstorm/spring-security-mongo.git
-    </developerConnection>
+    <developerConnection>scm:git:ssh://github.com:weresandstorm/spring-security-mongo.git</developerConnection>
     <url>https://github.com/weresandstorm/spring-security-mongo/tree/master</url>
   </scm>
 
@@ -173,7 +176,10 @@
           <execution>
             <id>attach-sources</id>
             <goals>
+              <!--
               <goal>jar</goal>
+              -->
+              <goal>jar-no-fork</goal>
             </goals>
           </execution>
         </executions>
@@ -212,6 +218,7 @@
           </execution>
         </executions>
       </plugin>
+      <!--
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -223,17 +230,18 @@
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
+      -->
     </plugins>
   </build>
 
   <distributionManagement>
     <snapshotRepository>
-      <!-- 'ossrh' stands for 'Open Source Software Repository Hosting' -->
-      <id>ossrh</id>
+      <!-- OSSRH stands for 'Open Source Software Repository Hosting' -->
+      <id>sonatype</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>ossrh</id>
+      <id>sonatype</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
