@@ -85,11 +85,7 @@ public abstract class MgoRepoBase<TDoc extends Entity<TID>, TID>
    */
   @Override
   public TDoc get(TID id) {
-    Optional<TDoc> theDoc = getOptional(id);
-    if (theDoc.isPresent()) {
-      return theDoc.get();
-    }
-    throw new RepositoryException(String.format("No such doc with id:%s", id));
+    return getOptional(id).orElse(null);
   }
 
   /**

@@ -37,11 +37,7 @@ public final class CodecRegistryProvider {
   }
 
   public static final CodecRegistry fromPojoCodecProvider() {
-    PojoCodecProvider pojoCodecProvider =
-        PojoCodecProvider.builder()
-            .register("me.konglong.springsecurity.domain")
-            .automatic(true)
-            .build();
+    PojoCodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
     return fromProviders(pojoCodecProvider);
   }
 
