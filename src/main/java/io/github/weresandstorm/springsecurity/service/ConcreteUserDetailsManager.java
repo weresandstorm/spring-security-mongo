@@ -20,8 +20,8 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import com.google.common.collect.Sets;
-import io.github.weresandstorm.springsecurity.domain.UserIdentity;
-import io.github.weresandstorm.springsecurity.domain.UserIdentityRepo;
+import io.github.weresandstorm.springsecurity.domain.Account;
+import io.github.weresandstorm.springsecurity.domain.AccountRepo;
 import java.util.Collection;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -42,17 +42,17 @@ public class ConcreteUserDetailsManager implements UserDetailsManager {
 
   protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-  private final UserIdentityRepo userIdentityRepo;
+  private final AccountRepo accountRepo;
 
   private AuthenticationManager authenticationManager;
 
   private SecurityContextService securityContextService;
 
   public ConcreteUserDetailsManager(
-      final UserIdentityRepo userRepository,
+      final AccountRepo userRepository,
       final SecurityContextService securityContextService,
       final AuthenticationManager authenticationManager) {
-    this.userIdentityRepo = userRepository;
+    this.accountRepo = userRepository;
     this.securityContextService = securityContextService;
     this.authenticationManager = authenticationManager;
   }
@@ -60,12 +60,12 @@ public class ConcreteUserDetailsManager implements UserDetailsManager {
   @Override
   public void createUser(final UserDetails user) {
     validateUserDetails(user);
-    userIdentityRepo.save(getUser(user));
+    accountRepo.save(getUser(user));
   }
 
-  private UserIdentity getUser(UserDetails userDetails) {
-    final UserIdentity userAccount = (UserIdentity) userDetails;
-    return new UserIdentity(
+  private Account getUser(UserDetails userDetails) {
+    final Account userAccount = (Account) userDetails;
+    return new Account(
         userAccount.getUsername(),
         userAccount.getPassword(),
         userAccount.getUserId(),
@@ -79,12 +79,12 @@ public class ConcreteUserDetailsManager implements UserDetailsManager {
   @Override
   public void updateUser(final UserDetails user) {
     validateUserDetails(user);
-    userIdentityRepo.save(getUser(user));
+    accountRepo.save(getUser(user));
   }
 
   @Override
   public void deleteUser(final String username) {
-    userIdentityRepo.deleteByUsername(username);
+    accountRepo.deleteByUsername(username);
   }
 
   @Override
@@ -113,19 +113,19 @@ public class ConcreteUserDetailsManager implements UserDetailsManager {
 
     logger.debug("Changing password for user '" + username + "'");
 
-    userIdentityRepo.changePassword(oldPassword, newPassword, username);
+    accountRepo.changePassword(oldPassword, newPassword, username);
 
     securityContextService.setAuthentication(createNewAuthentication(currentUser));
   }
 
   @Override
   public boolean userExists(final String username) {
-    return userIdentityRepo.findByUsername(username).isPresent();
+    return accountRepo.findByUsername(username).isPresent();
   }
 
   @Override
   public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-    final Optional<UserIdentity> byUsername = userIdentityRepo.findByUsername(username);
+    final Optional<Account> byUsername = accountRepo.findByUsername(username);
     if (byUsername.isPresent()) {
       return byUsername.get();
     }

@@ -18,28 +18,27 @@ package io.github.weresandstorm.springsecurity.persist;
 
 import static com.mongodb.client.model.Updates.set;
 
-import io.github.weresandstorm.springsecurity.domain.UserIdentity;
-import io.github.weresandstorm.springsecurity.domain.UserIdentityRepo;
+import io.github.weresandstorm.springsecurity.domain.Account;
+import io.github.weresandstorm.springsecurity.domain.AccountRepo;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MgoUserIdentityRepo extends MgoRepoBase<UserIdentity, String>
-    implements UserIdentityRepo {
+public class MgoAccountRepo extends MgoRepoBase<Account, String> implements AccountRepo {
 
   @Override
   public String collectionName() {
-    return "user_identities";
+    return "accounts";
   }
 
   @Override
-  public Optional<UserIdentity> findByUsername(String username) {
+  public Optional<Account> findByUsername(String username) {
     return getOptional(username);
   }
 
   @Override
   public boolean changePassword(String oldPassword, String newPassword, String username) {
-    UserIdentity account = get(username);
+    Account account = get(username);
     // TODO This is business logic and should be moved into domain service.
     if (!account.getPassword().equals(oldPassword)) {
       throw new RuntimeException("Old password is incorrect");

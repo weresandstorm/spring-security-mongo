@@ -21,7 +21,7 @@ import static io.github.weresandstorm.springsecurity.commons.SecurityRDG.set;
 import static io.github.weresandstorm.springsecurity.commons.SecurityRDG.string;
 
 import io.github.weresandstorm.springsecurity.commons.SecurityRDG;
-import io.github.weresandstorm.springsecurity.domain.UserIdentity;
+import io.github.weresandstorm.springsecurity.domain.Account;
 import java.util.Set;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,8 +43,8 @@ public final class UserIdentityBuilder {
     return new UserIdentityBuilder();
   }
 
-  public UserIdentity build() {
-    return new UserIdentity(
+  public Account build() {
+    return new Account(
         username,
         password,
         userId,

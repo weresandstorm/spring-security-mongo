@@ -21,8 +21,8 @@ import static uk.org.fyodor.generators.RDG.string;
 
 import io.github.weresandstorm.springsecurity.builders.UserIdentityBuilder;
 import io.github.weresandstorm.springsecurity.config.PersistConf;
-import io.github.weresandstorm.springsecurity.domain.UserIdentity;
-import io.github.weresandstorm.springsecurity.domain.UserIdentityRepo;
+import io.github.weresandstorm.springsecurity.domain.Account;
+import io.github.weresandstorm.springsecurity.domain.AccountRepo;
 import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,32 +34,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PersistConf.class)
 @TestPropertySource("classpath:mongo.properties")
-public class UserIdentityIntegTest {
+public class AccountIntegTest {
 
-  @Autowired private UserIdentityRepo userIdentityRepo;
+  @Autowired private AccountRepo accountRepo;
 
   @Test
   public void shouldSaveUser() {
     // Given
-    UserIdentity account = UserIdentityBuilder.userIdentityBuilder().build();
+    Account account = UserIdentityBuilder.userIdentityBuilder().build();
 
     // When
-    UserIdentity result = userIdentityRepo.save(account);
+    Account result = accountRepo.save(account);
 
     // Then
-    Optional<UserIdentity> expectedAccount = userIdentityRepo.findByUsername(account.getUsername());
+    Optional<Account> expectedAccount = accountRepo.findByUsername(account.getUsername());
     assertThat(result).isEqualTo(expectedAccount.get());
   }
 
   @Test
   public void shouldChangePasswordUser() {
     // Given
-    UserIdentity account = UserIdentityBuilder.userIdentityBuilder().build();
-    userIdentityRepo.save(account);
+    Account account = UserIdentityBuilder.userIdentityBuilder().build();
+    accountRepo.save(account);
 
     // When
     final boolean result =
-        userIdentityRepo.changePassword(
+        accountRepo.changePassword(
             account.getPassword(), string().next(), account.getUsername());
 
     // Then

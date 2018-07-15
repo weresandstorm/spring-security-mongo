@@ -18,9 +18,9 @@ package io.github.weresandstorm.springsecurity.domain;
 
 import java.util.Optional;
 
-public interface UserIdentityRepo extends Repo<UserIdentity, String> {
+public interface AccountRepo extends Repo<Account, String> {
 
-  Optional<UserIdentity> findByUsername(String username);
+  Optional<Account> findByUsername(String username);
 
   boolean changePassword(String oldPassword, String newPassword, String username);
 

@@ -26,34 +26,34 @@ import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserIdentity implements UserDetails, CredentialsContainer, Entity<String> {
+public class Account implements UserDetails, CredentialsContainer, Entity<String> {
 
   @BsonId public String username;
   public String password;
   public ObjectId userId;
   public Set<GrantedAuthority> grantedAuthorities;
-  public boolean accountNonExpired;
-  public boolean accountNonLocked;
+  public boolean nonExpired;
+  public boolean nonLocked;
   public boolean credentialsNonExpired;
   public boolean enabled;
 
-  public UserIdentity() {}
+  public Account() {}
 
-  public UserIdentity(
+  public Account(
       final String username,
       final String password,
       final ObjectId userId,
       final Set<GrantedAuthority> grantedAuthorities,
-      final boolean accountNonExpired,
-      final boolean accountNonLocked,
+      final boolean nonExpired,
+      final boolean nonLocked,
       final boolean credentialsNonExpired,
       final boolean enabled) {
     this.username = username;
     this.password = password;
     this.userId = userId;
     this.grantedAuthorities = grantedAuthorities;
-    this.accountNonExpired = accountNonExpired;
-    this.accountNonLocked = accountNonLocked;
+    this.nonExpired = nonExpired;
+    this.nonLocked = nonLocked;
     this.credentialsNonExpired = credentialsNonExpired;
     this.enabled = enabled;
   }
@@ -85,12 +85,12 @@ public class UserIdentity implements UserDetails, CredentialsContainer, Entity<S
 
   @Override
   public boolean isAccountNonExpired() {
-    return accountNonExpired;
+    return nonExpired;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return accountNonLocked;
+    return nonLocked;
   }
 
   @Override
@@ -115,8 +115,8 @@ public class UserIdentity implements UserDetails, CredentialsContainer, Entity<S
         username,
         userId,
         grantedAuthorities,
-        accountNonExpired,
-        accountNonLocked,
+        nonExpired,
+        nonLocked,
         credentialsNonExpired,
         enabled);
   }
@@ -129,20 +129,20 @@ public class UserIdentity implements UserDetails, CredentialsContainer, Entity<S
     if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
-    final UserIdentity other = (UserIdentity) obj;
+    final Account other = (Account) obj;
     return Objects.equals(this.password, other.password)
         && Objects.equals(this.username, other.username)
         && Objects.equals(this.userId, other.userId)
         && Objects.equals(this.grantedAuthorities, other.grantedAuthorities)
-        && Objects.equals(this.accountNonExpired, other.accountNonExpired)
-        && Objects.equals(this.accountNonLocked, other.accountNonLocked)
+        && Objects.equals(this.nonExpired, other.nonExpired)
+        && Objects.equals(this.nonLocked, other.nonLocked)
         && Objects.equals(this.credentialsNonExpired, other.credentialsNonExpired)
         && Objects.equals(this.enabled, other.enabled);
   }
 
   @Override
   public String toString() {
-    return "UserIdentity{"
+    return "Account{"
         + "username='"
         + username
         + '\''
@@ -153,10 +153,10 @@ public class UserIdentity implements UserDetails, CredentialsContainer, Entity<S
         + userId
         + ", grantedAuthorities="
         + grantedAuthorities
-        + ", accountNonExpired="
-        + accountNonExpired
-        + ", accountNonLocked="
-        + accountNonLocked
+        + ", nonExpired="
+        + nonExpired
+        + ", nonLocked="
+        + nonLocked
         + ", credentialsNonExpired="
         + credentialsNonExpired
         + ", enabled="
