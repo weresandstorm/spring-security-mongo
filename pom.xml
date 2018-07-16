@@ -14,7 +14,7 @@
 
   <groupId>io.github.weresandstorm</groupId>
   <artifactId>spring-security-mongo</artifactId>
-  <version>0.8.2</version>
+  <version>0.8.3</version>
   <packaging>jar</packaging>
 
   <name>spring-security-mongo</name>

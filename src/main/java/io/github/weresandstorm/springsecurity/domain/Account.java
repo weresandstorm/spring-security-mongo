@@ -83,11 +83,13 @@ public class Account implements UserDetails, CredentialsContainer, Entity<String
     return grantedAuthorities;
   }
 
+  @BsonIgnore
   @Override
   public boolean isAccountNonExpired() {
     return nonExpired;
   }
 
+  @BsonIgnore
   @Override
   public boolean isAccountNonLocked() {
     return nonLocked;
